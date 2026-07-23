@@ -65,7 +65,7 @@ Jurisprudentie en regelgeving zien er in alle drie de stijlen hetzelfde uit.
 
 ## Installeren in Zotero
 
-1. Download het gewenste `.csl`-bestand (of alle drie) van de **Releases**-pagina.
+1. Download het gewenste `.csl`-bestand (of alle drie) van de [**Releases**-pagina](https://github.com/ABeehive/leidraad-juridische-auteurs-2025-zotero/releases).
 2. Open Zotero → **Instellingen** (of *Preferences*) → tabblad **Citeren** →
    sectie **Stijlen**.
 3. Klik op **➕ Stijl toevoegen uit bestand…** en kies het `.csl`-bestand.
