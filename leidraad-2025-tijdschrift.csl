@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0"
+       demote-non-dropping-particle="sort-only" default-locale="nl-NL">
+  <info>
+    <title>Leidraad voor juridische auteurs 2025 (tijdschrift)</title>
+    <title-short>Leidraad 2025</title-short>
+    <id>https://github.com/ABeehive/leidraad-juridische-auteurs-2025-zotero/leidraad-2025-tijdschrift</id>
+    <link href="https://github.com/ABeehive/leidraad-juridische-auteurs-2025-zotero" rel="self"/>
+    <link href="https://www.wolterskluwer.nl/shop/boek/leidraad-voor-juridische-auteurs/NPLDR11/" rel="documentation"/>
+    <category citation-format="note"/>
+    <category field="law"/>
+    <summary>Verwijssysteem van de Leidraad voor juridische auteurs, elfde druk (Deventer 2025).</summary>
+    <updated>2026-07-20T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <locale xml:lang="nl-NL">
+    <terms>
+      <!-- Leidraad p. 21: uitsluitend 'p.', dus niet 'pp.' of 'blz.' -->
+      <term name="page" form="short">
+        <single>p.</single>
+        <multiple>p.</multiple>
+      </term>
+      <!-- Leidraad hanteert enkele aanhalingstekens voor titels -->
+      <term name="open-quote">‘</term>
+      <term name="close-quote">’</term>
+      <term name="open-inner-quote">“</term>
+      <term name="close-inner-quote">”</term>
+      <term name="et-al">e.a.</term>
+      <term name="editor" form="short">
+        <single>red.</single>
+        <multiple>red.</multiple>
+      </term>
+          <!-- citeproc leest een locator die met 'art.' begint en zet het label op
+           'article'. De nl-NL-locale kent daarvoor alleen de itemsoort-term
+           'preprint', zodat 'art. 6:164 BW' als 'preprint 6:164 BW' zou
+           renderen. Hier de juiste afkorting; §3.3.2 schrijft 'art.' voor. -->
+      <term name="article" form="short">art.</term>
+</terms>
+  </locale>
+
+  <!-- ===================================================================
+       LAAG 1 — BOUWSTENEN
+       =================================================================== -->
+
+  <!-- Voluit: 'M. van Opijnen', 'J.E. Spruit, J.M.J. Chorus & C.H. Bezemer'.
+       Voorletters zonder spatie ertussen (Leidraad p. 37). -->
+  <macro name="auteurs-voluit">
+    <names variable="author">
+      <name and="symbol" initialize-with="." delimiter=", "
+            delimiter-precedes-last="never" delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <!-- Verkort: alleen achternamen, tussenvoegsel mee en met hoofdletter.
+       'Van Opijnen', 'Fiers & Van Oosterhout' (Leidraad p. 34, 37). -->
+  <macro name="auteurs-verkort">
+    <names variable="author">
+      <name form="short" and="symbol" delimiter=", "
+            delimiter-precedes-last="never" delimiter-precedes-et-al="never">
+        <name-part name="family" text-case="capitalize-first"/>
+      </name>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="oorspronkelijk-jaar">
+    <!-- Bij een vertaling of heruitgave draagt de verkorte verwijzing het
+         jaar van het origineel tussen haakjes: 'Mill (1859) 1978, p. 50'
+         (Leidraad 2025, p. 152). Het staat vóór het jaar van de gebruikte
+         uitgave, want dat laatste is de vindplaats. -->
+    <date variable="original-date" prefix="(" suffix=")">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="jaar">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="uitgever-plaats">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <!-- Boektitel cursief, gevolgd door reeks en/of soortaanduiding tussen
+       haakjes: 'Libri feudorum (Corpus Iuris Civilis...)',
+       'Op en in het web... (diss. Amsterdam UvA)'. -->
+  <macro name="titel-boek">
+    <group delimiter=" ">
+      <text variable="title" font-style="italic"/>
+      <group prefix="(" suffix=")" delimiter=", ">
+        <text variable="genre"/>
+        <group delimiter=" ">
+          <text variable="collection-title"/>
+          <text variable="collection-number"/>
+        </group>
+      </group>
+    </group>
+  </macro>
+
+  <!-- Redacteuren van een bundel: 'T. Gerverdinck e.a. (red.)' -->
+  <macro name="redacteuren">
+    <names variable="editor">
+      <name and="symbol" initialize-with="." delimiter=", "
+            delimiter-precedes-last="never" delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+
+  <!-- Verkorte vorm voor een bundel die als geheel wordt aangehaald
+       (Leidraad §2.3.2), waar geen auteur maar alleen redacteuren zijn. -->
+  <macro name="redacteuren-verkort">
+    <names variable="editor">
+      <name form="short" and="symbol" delimiter=", "
+            delimiter-precedes-last="never" delimiter-precedes-et-al="never">
+        <name-part name="family" text-case="capitalize-first"/>
+      </name>
+      <et-al term="et-al"/>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+
+  <macro name="paginabereik">
+    <group delimiter=" ">
+      <label variable="page" form="short"/>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <!-- ===================================================================
+       LAAG 2 — BRONVORMEN
+       =================================================================== -->
+
+  <macro name="lit-boek">
+    <group delimiter=", ">
+      <text macro="auteurs-voluit"/>
+      <text macro="titel-boek"/>
+      <group delimiter=" ">
+        <text macro="uitgever-plaats"/>
+        <text macro="jaar"/>
+      </group>
+    </group>
+  </macro>
+
+  <!-- Bijdrage in een bundel (Leidraad p. 23-24). De redacteur komt uit
+       'editor'; de auteur van de bijdrage blijft de auteur, ook in de
+       verkorte verwijzing. -->
+  <macro name="lit-bijdrage">
+    <group delimiter=", ">
+      <text macro="auteurs-voluit"/>
+      <text variable="title" quotes="true"/>
+      <group delimiter=", " prefix="in: ">
+        <text macro="redacteuren"/>
+        <text variable="container-title" font-style="italic"/>
+        <group delimiter=" ">
+          <text macro="uitgever-plaats"/>
+          <text macro="jaar"/>
+        </group>
+      </group>
+      <text macro="paginabereik"/>
+    </group>
+  </macro>
+
+  <!-- Tijdschriftartikel (Leidraad p. 24-25). Jaartal, en als er een
+       publicatienummer is een schuine streep met dat nummer direct erachter:
+       'NJB 2022/686'. -->
+  <macro name="jaar-publicatienummer">
+    <group delimiter="/">
+      <text macro="jaar"/>
+      <text variable="issue"/>
+    </group>
+  </macro>
+
+  <macro name="bespreking">
+    <!-- §2.4.3. Twee vormen. Gaat de verwijzing om het besproken boek, dan
+         volgt na de artikeltitel '(bespreking van: ...)' met de gegevens van
+         dat boek. Gaat het om de bespreking als geheel, dan volstaat
+         '(boekbespreking)'.
+
+         CSL kan geen bron in een bron beschrijven: reviewed-author en
+         reviewed-title zijn er wel, de uitgever en het jaar van het besproken
+         werk niet. Die gaan daarom in reviewed-genre, dat achter de cursieve
+         titel in gewone letter verschijnt. Zie INVOER.md. -->
+    <choose>
+      <if variable="reviewed-title">
+        <group prefix="(" suffix=")" delimiter=" ">
+          <text value="bespreking van:"/>
+          <group delimiter=", ">
+            <names variable="reviewed-author">
+              <name and="symbol" initialize-with="." delimiter=", "
+                    delimiter-precedes-last="never"/>
+            </names>
+            <group delimiter=" ">
+              <text variable="reviewed-title" font-style="italic"/>
+              <text variable="reviewed-genre"/>
+            </group>
+          </group>
+        </group>
+      </if>
+      <else-if variable="genre">
+        <text variable="genre" prefix="(" suffix=")"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <macro name="aflevering">
+    <!-- Begint de paginering per aflevering opnieuw bij 1, dan hoort het
+         afleveringsnummer in de verwijzing: 'Openbaar bestuur 1998, afl. 6/7'
+         (§2.4.3) en 'Adv.bl. 2025, afl. 2' (bijlage B.2). Dat is iets anders
+         dan het publicatienummer, dat achter een schuine streep bij het
+         jaartal staat. -->
+    <group delimiter=" ">
+      <!-- De locale geeft 'nr.'; de Leidraad schrijft 'afl.'. -->
+      <text value="afl."/>
+      <text variable="number"/>
+    </group>
+  </macro>
+
+  <macro name="lit-interview">
+    <!-- §2.4.4. Een interview wordt opgevoerd als artikel van de interviewer,
+         maar omdat de verwijzing meestal de woorden van de geïnterviewde
+         betreft staat diens naam vooraan — en in de verkorte verwijzing als
+         enige. Vandaar geïnterviewde in Author en interviewer(s) in
+         Interviewer; zie INVOER.md.
+
+         Naam en hoedanigheid van de geïnterviewde mogen achter de titel
+         worden herhaald wanneer ze niet in de titel staan; dat is vrije tekst
+         en komt uit genre. -->
+    <group delimiter=", ">
+      <text macro="auteurs-voluit"/>
+      <names variable="interviewer" prefix="in: ">
+        <name and="symbol" initialize-with="." delimiter=", "
+              delimiter-precedes-last="never"/>
+      </names>
+      <group delimiter=" ">
+        <text variable="title" quotes="true"/>
+        <choose>
+          <if variable="genre">
+            <text variable="genre" prefix="(" suffix=")"/>
+          </if>
+        </choose>
+      </group>
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text macro="datum-volledig"/>
+      </group>
+    </group>
+  </macro>
+
+  <macro name="lit-artikel">
+    <group delimiter=", ">
+      <text macro="auteurs-voluit"/>
+      <group delimiter=" ">
+        <text variable="title" quotes="true"/>
+        <text macro="bespreking"/>
+      </group>
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text macro="jaar-publicatienummer"/>
+      </group>
+      <text macro="aflevering"/>
+      <text macro="paginabereik"/>
+    </group>
+  </macro>
+
+  <!-- Jurisprudentie (Leidraad §4.4). Vaste volgorde: instantie, datum,
+       ECLI (of zaaknummer), rechtsoverweging, vindplaats, annotator,
+       roepnaam. Datum voluit met de maand uitgeschreven. -->
+  <macro name="datum-volledig">
+    <date variable="issued" delimiter=" ">
+      <date-part name="day"/>
+      <date-part name="month" form="long"/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <!-- 'NJ 2016/173' of 'NJCM-Bulletin 1982, p. 334' -->
+  <macro name="jur-vindplaats">
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text variable="volume"/>
+      </group>
+      <text macro="paginabereik"/>
+    </group>
+  </macro>
+
+  <!-- Bij Nederlandse rechtspraak heet een genummerd onderdeel een
+       rechtsoverweging, bij EU- en EHRM-uitspraken een paragraaf (§4.5,
+       §4.6). CSL kan dat onderscheid niet uit de instantienaam afleiden,
+       dus draagt de gekozen locatorsoort het: 'paragraaf' wordt 'r.o.',
+       'sectie' wordt 'par.'. Zie INVOER.md. -->
+  <macro name="locator-jurisprudentie">
+    <group delimiter=" ">
+      <choose>
+        <if locator="paragraph">
+          <text value="r.o."/>
+        </if>
+        <else-if locator="section">
+          <text value="par."/>
+        </else-if>
+        <else>
+          <label variable="locator" form="short"/>
+        </else>
+      </choose>
+      <text variable="locator"/>
+    </group>
+  </macro>
+
+  <macro name="jurisprudentie">
+    <group>
+      <group delimiter=", ">
+        <group delimiter=" ">
+          <text variable="authority"/>
+          <text macro="datum-volledig"/>
+        </group>
+        <!-- Direct achter de ECLI kan een toevoeging tussen haakjes staan,
+             zoals '(concl. A-G J. Spier)' of '(vervolg op: …)' — vóór de
+             vindplaats (§4.4.2). Zotero's veld History draagt die. -->
+        <group delimiter=" ">
+          <text variable="number"/>
+          <text variable="references" prefix="(" suffix=")"/>
+        </group>
+        <text macro="locator-jurisprudentie"/>
+        <text macro="jur-vindplaats"/>
+        <text variable="note"/>
+      </group>
+      <text variable="title" prefix=" (" suffix=")" font-style="italic"/>
+    </group>
+  </macro>
+
+  <!-- Regelgeving (Leidraad §3.2). Naam van het publicatieblad afgekort en
+       cursief, dan jaartal en nummer. Met citeertitel komt de vindplaats
+       tussen haakjes; zonder citeertitel staat zij op zichzelf. -->
+  <macro name="reg-vindplaats">
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text macro="jaar"/>
+      </group>
+      <!-- citeproc normaliseert 'number' en strijkt daarbij een voorvoegsel
+           als 'no.' weg. Caribische bladen schrijven dat voorvoegsel wel
+           voor (§3.2, p. 73), dus wint het tekstveld 'section' als het
+           gevuld is. Zie INVOER.md. -->
+      <choose>
+        <if variable="section">
+          <text variable="section"/>
+        </if>
+        <else>
+          <text variable="number"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="reg-wet">
+    <choose>
+      <if variable="title">
+        <group delimiter=" ">
+          <text variable="title"/>
+          <text macro="reg-vindplaats" prefix="(" suffix=")"/>
+        </group>
+      </if>
+      <else>
+        <text macro="reg-vindplaats"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Parlementaire documenten (Leidraad §3.4): blad cursief, vergaderjaar,
+       dossiernummer, documentnummer. De Tweede Kamer nummert met cijfers
+       ('nr. 3'), de Eerste Kamer met letters ('A') zonder voorvoegsel. -->
+  <macro name="reg-kamerstuk">
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text variable="chapter-number"/>
+      </group>
+      <text variable="number"/>
+      <choose>
+        <if is-numeric="section">
+          <text variable="section" prefix="nr. "/>
+        </if>
+        <else>
+          <text variable="section"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+
+  <!-- Online bronnen (Leidraad §2.7). Op de plaats waar bij een
+       tijdschriftartikel de tijdschrifttitel staat, komt zo kort mogelijk
+       het webadres, altijd met een kleine letter. Bij podcasts en video's
+       gaat daar de naam van het kanaal aan vooraf. -->
+  <macro name="online-vindplaats">
+    <group delimiter=", ">
+      <text variable="container-title"/>
+      <text variable="publisher"/>
+      <text variable="publisher-place"/>
+    </group>
+  </macro>
+
+  <macro name="lit-online">
+    <group>
+      <group delimiter=", ">
+        <text macro="auteurs-voluit"/>
+        <text variable="title" quotes="true"/>
+        <text macro="online-vindplaats"/>
+        <text macro="datum-volledig"/>
+      </group>
+      <choose>
+        <if type="broadcast">
+          <text value=" (podcast)"/>
+        </if>
+      </choose>
+    </group>
+  </macro>
+
+  <!-- ===================================================================
+       LAAG 3 — PRESENTATIE
+       =================================================================== -->
+
+  <!-- De verkorte verwijzing. Dient zowel als voetnoot-opening als als
+       vetgedrukt opschrift boven de literatuurlijstregel (Leidraad p. 33). -->
+  <!-- Geen <substitute> hier: CSL onderdrukt een via substitute gerenderde
+       variabele in de rest van de verwijzing, waardoor de titel uit de
+       volledige beschrijving zou verdwijnen. Vandaar een expliciete keuze.
+       Auteurloze werken krijgen de verkorte titel als kop (p. 35-36). -->
+  <macro name="verkort-online">
+    <!-- §2.6.3: bij een publicatie die uitsluitend online verschijnt volgt op
+         de auteursnaam geen jaartal maar ', in:' met de verkorte, cursieve
+         titel van het werk. Ontbreekt de auteur — gebruikelijk bij
+         documentaire series als de Vakstudie — dan begint de verwijzing met
+         die verkorte titel. Deze vorm is in beide methoden gelijk; de
+         vergelijkingstabel van bijlage B toont hem in allebei de kolommen. -->
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="auteurs-verkort"/>
+        </if>
+      </choose>
+      <choose>
+        <if variable="container-title">
+          <text variable="container-title" form="short" font-style="italic"
+                prefix="in: "/>
+        </if>
+        <else>
+          <text variable="title" form="short" font-style="italic"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="online-actueel">
+    <!-- 'In de voetnoot eindigt de verkorte verwijzing altijd met de laatste
+         bijwerkdatum: (online, bijgewerkt [datum])' (§2.6.3). De datum komt
+         uit available-date; zie INVOER.md. -->
+    <choose>
+      <if variable="available-date">
+        <group prefix=" (" suffix=")" delimiter=", ">
+          <text value="online"/>
+          <date variable="available-date" prefix="bijgewerkt ">
+            <date-part name="day" suffix=" "/>
+            <date-part name="month" form="long" suffix=" "/>
+            <date-part name="year"/>
+          </date>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="verkort">
+    <choose>
+      <if variable="available-date">
+        <text macro="verkort-online"/>
+      </if>
+      <else>
+      <!-- Bijlage B: de verkorte verwijzing draagt behalve auteur en jaartal
+           ook een aanduiding van het werk. Bij boeken is dat de verkorte
+           boektitel (B.1), bij tijdschriftartikelen de tijdschrifttitel met
+           publicatienummer (B.2). Zie de vergelijkingstabel op p. 151-152. -->
+      <group delimiter=", ">
+        <choose>
+          <if variable="author">
+            <text macro="auteurs-verkort"/>
+          </if>
+          <else-if variable="editor">
+            <text macro="redacteuren-verkort"/>
+          </else-if>
+        </choose>
+        <group delimiter=" ">
+          <choose>
+            <!-- B.2: tijdschrifttitel in plaats van artikeltitel. -->
+            <if type="article-journal article article-magazine article-newspaper" match="any">
+              <text variable="container-title" font-style="italic"/>
+            </if>
+            <!-- B.1: bij een bundelbijdrage wordt niet de bijdrage verkort
+                 maar de bundel, met 'in:' ervoor (p. 150). -->
+            <else-if type="chapter paper-conference" match="any">
+              <text variable="container-title" form="short" font-style="italic"
+                    prefix="in: "/>
+            </else-if>
+            <else>
+              <text variable="title" form="short" font-style="italic"/>
+            </else>
+          </choose>
+          <group delimiter=" ">
+            <text macro="oorspronkelijk-jaar"/>
+            <group>
+            <text macro="jaar"/>
+            <text variable="year-suffix"/>
+            <choose>
+              <!-- B.2: het publicatienummer hoort bij de vindplaats. -->
+              <if type="article-journal article article-magazine article-newspaper" match="any">
+                <text variable="issue" prefix="/"/>
+              </if>
+              <!-- B.1: 'Bij deze alternatieve methode past het gebruik van een
+                   schuine streep tussen het jaartal van de editie en het
+                   paragraafnummer. Dat geldt dus niet voor paginaverwijzingen'
+                   (p. 150). Bij tijdschriften geldt die streep niet: daar staat
+                   'Dirksen, NJB 2025/536, par. 5' (p. 153). -->
+              <else-if locator="paragraph">
+                <text variable="locator" prefix="/"/>
+              </else-if>
+            </choose>
+            </group>
+          </group>
+        </group>
+        <!-- Begint de paginering per aflevering opnieuw, dan hoort dat
+             nummer ook in de verkorte verwijzing: 'Sytema, Adv.bl. 2025,
+             afl. 2' (B.2, p. 153). -->
+        <choose>
+          <if type="article-journal article article-magazine article-newspaper"
+              match="any">
+            <text macro="aflevering"/>
+          </if>
+        </choose>
+        <!-- 'Geef de begin- en eindpagina als het tijdschrift geen
+             publicatienummers bevat' (B.2, p. 153). Wijst de voetnoot een
+             bepaalde plaats aan, dan neemt die het over. -->
+        <choose>
+          <if type="article-journal article article-magazine article-newspaper"
+              match="any">
+            <choose>
+              <if variable="issue locator" match="none">
+                <text macro="paginabereik"/>
+              </if>
+            </choose>
+          </if>
+        </choose>
+      </group>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="locator">
+    <choose>
+      <!-- Bij een online werk typt de auteur de hele
+           aanduiding zelf: 'art. 6:164 BW, aant. 4.2'. Daar
+           hoort geen 'p.' voor. -->
+      <if variable="available-date">
+        <group delimiter=" ">
+          <label variable="locator" form="short"/>
+          <text variable="locator"/>
+        </group>
+      </if>
+      <else>
+      <choose>
+        <!-- Bij boeken en bundelbijdragen staat het paragraafnummer al achter
+             het jaartal, achter een schuine streep; hier zou het dubbel komen. -->
+        <if type="article-journal article article-magazine article-newspaper" match="none">
+          <choose>
+            <if locator="paragraph"/>
+            <else>
+              <group delimiter=" ">
+                <label variable="locator" form="short"/>
+                <text variable="locator"/>
+              </group>
+            </else>
+          </choose>
+        </if>
+        <else>
+          <group delimiter=" ">
+            <label variable="locator" form="short"/>
+            <text variable="locator"/>
+          </group>
+        </else>
+      </choose>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="pinpoint-voluit">
+    <!-- De pinpoint achter de voluit-verwijzing. Bij boeken en bundels hangt een
+         paragraaf als schuine streep achter het jaartal — 'Asser/Sieburgh 6-III
+         2022/13' — net als in de verkorte vorm (Leidraad p. 151-152). Een pagina,
+         en alles bij tijdschriften, krijgt de gewone ', p. 73' / ', par. 5'. -->
+    <choose>
+      <if type="article-journal article article-magazine article-newspaper" match="any">
+        <text macro="locator" prefix=", "/>
+      </if>
+      <else-if locator="paragraph">
+        <text variable="locator" prefix="/"/>
+      </else-if>
+      <else>
+        <text macro="locator" prefix=", "/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="voetnoot">
+    <!-- Volledige/tijdschriftmethode: er is geen literatuurlijst, dus staat een
+         literatuurbron de eerste keer voluit in de voetnoot (lijst-volledig) en
+         elke latere keer verkort (verkort). Alleen literatuur; jurisprudentie,
+         regelgeving en Kamerstukken houden hun gewone voetnootvorm. Geen ibidem
+         (Leidraad Sec5.1): de verkorte vorm wordt elke keer herhaald. -->
+    <choose>
+      <if type="legal_case">
+        <text macro="jurisprudentie"/>
+      </if>
+      <else-if type="legislation">
+        <text macro="reg-wet"/>
+      </else-if>
+      <else-if type="bill">
+        <group delimiter=", ">
+          <text macro="reg-kamerstuk"/>
+          <text macro="locator"/>
+        </group>
+      </else-if>
+      <!-- Online met auteur is literatuur; auteurloos online blijft voluit. -->
+      <else-if type="webpage post-weblog broadcast motion_picture" match="any">
+        <choose>
+          <if variable="author">
+            <choose>
+              <if position="subsequent">
+                <group delimiter=", ">
+                  <text macro="verkort"/>
+                  <text macro="locator"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=", ">
+                  <text macro="lijst-volledig"/>
+                  <text macro="locator"/>
+                </group>
+              </else>
+            </choose>
+          </if>
+          <else>
+            <text macro="lit-online"/>
+          </else>
+        </choose>
+      </else-if>
+      <else>
+        <group>
+          <choose>
+            <if position="subsequent">
+              <group delimiter=", ">
+                <text macro="verkort"/>
+                <text macro="locator"/>
+              </group>
+            </if>
+            <else>
+              <group>
+                <text macro="lijst-volledig"/>
+                <text macro="pinpoint-voluit"/>
+              </group>
+            </else>
+          </choose>
+          <text macro="online-actueel"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="lijst-volledig">
+    <choose>
+      <if type="legal_case">
+        <text macro="jurisprudentie"/>
+      </if>
+      <else-if type="legislation">
+        <text macro="reg-wet"/>
+      </else-if>
+      <else-if type="bill">
+        <text macro="reg-kamerstuk"/>
+      </else-if>
+      <else-if type="webpage post-weblog broadcast motion_picture" match="any">
+        <text macro="lit-online"/>
+      </else-if>
+      <else-if type="chapter paper-conference" match="any">
+        <text macro="lit-bijdrage"/>
+      </else-if>
+      <else-if type="interview">
+        <text macro="lit-interview"/>
+      </else-if>
+      <else-if type="article-journal article" match="any">
+        <text macro="lit-artikel"/>
+      </else-if>
+      <else>
+        <text macro="lit-boek"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- ===================================================================
+       SORTERING — roept nooit een rendermacro aan en gebruikt nooit
+       de locator, want die verschilt per citatie.
+       =================================================================== -->
+
+  <!-- De Leidraad kent gescheiden lijsten (p. 36, §4.8). CSL kan er maar
+       één produceren, dus groeperen we binnen die ene lijst. Online
+       bronnen mét auteur horen bij de literatuur (§2.7.1); zonder auteur
+       staan ze achteraan. -->
+  <macro name="sorteer-groep">
+    <choose>
+      <if type="legislation">
+        <text value="20"/>
+      </if>
+      <else-if type="bill">
+        <text value="30"/>
+      </else-if>
+      <else-if type="legal_case">
+        <text value="40"/>
+      </else-if>
+      <else-if type="webpage post-weblog broadcast motion_picture" match="any">
+        <choose>
+          <if variable="author">
+            <text value="10"/>
+          </if>
+          <else>
+            <text value="50"/>
+          </else>
+        </choose>
+      </else-if>
+      <else>
+        <text value="10"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Jurisprudentie wordt per instantie gegroepeerd. De territoriaal-
+       hiërarchische volgorde van §4.8 is in CSL niet uit te drukken —
+       er is geen manier om de inhoud van een veld te vergelijken — dus
+       is de groepering alfabetisch op instantie. Zie README.md. -->
+  <macro name="sorteer-binnen-groep">
+    <choose>
+      <if type="legal_case">
+        <text variable="authority"/>
+      </if>
+      <else-if type="legislation bill" match="any">
+        <text variable="container-title"/>
+      </else-if>
+      <else>
+        <names variable="author">
+          <name form="short" name-as-sort-order="all" sort-separator=" "/>
+          <substitute>
+            <text variable="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="sorteer-datum">
+    <choose>
+      <if type="bill">
+        <text variable="number"/>
+      </if>
+      <else-if type="legal_case legislation" match="any">
+        <date variable="issued" form="numeric" date-parts="year-month-day"/>
+      </else-if>
+      <else>
+        <text macro="jaar"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- =================================================================== -->
+
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true">
+    <layout delimiter="; " suffix=".">
+      <text macro="voetnoot"/>
+    </layout>
+  </citation>
+
+</style>
