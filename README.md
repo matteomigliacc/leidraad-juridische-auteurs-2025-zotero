@@ -2,7 +2,7 @@
 
 > Verwijs volgens de [**Leidraad voor juridische auteurs**](https://shop.wolterskluwer.nl/Leidraad-voor-juridische-auteurs-sNPLEIJUAU/), elfde druk (Deventer 2025), met [Zotero](https://www.zotero.org).
 
-Dit is een vakantieproject geweest. Ik werk al jaren met Zotero om jurisprudentie, literatuur en rapporten en kamerstukken in op te slaan die ik wil gebruiken in mijn voetnoten etc. Daarvoor maakte ik voorheen altijd gebruik van de CSL-stijl van van **Joël Hendriks** en **Pieter van der Wees** (zie uitgebreid [(hieronder)](#met-dank-aan)), alleen met de nieuwe Leidraad en de mogelijkheden om met een taalmodel dit allemaal wat aan te vullen ben ik in de vakantie aan de slag gegaan. Dit leverde het volgende op: drie CSL-stijlen die het complete verwijssysteem van de Leidraad pogen te implementeren: literatuur, Nederlandse en Europese rechtspraak, regelgeving en parlementaire
+Dit is een vakantieproject geweest. Ik werk al jaren met Zotero om jurisprudentie, literatuur en rapporten en kamerstukken in op te slaan die ik wil gebruiken in mijn voetnoten etc. Voor dat voetnoten- en literatuurlijstwerk maakte ik voorheen altijd gebruik van de CSL-stijl van van **Joël Hendriks** en **Pieter van der Wees** (zie uitgebreid [(hieronder)](#met-dank-aan)), alleen met de nieuwe Leidraad en de mogelijkheden om met een taalmodel dit allemaal wat aan te vullen, wilde ik een nieuwe versie maken. Dus ben ik in de vakantie aan de slag gegaan. Dit leverde het volgende op: drie CSL-stijlen die het complete verwijssysteem van de Leidraad pogen te implementeren: literatuur, Nederlandse en Europese rechtspraak, regelgeving en parlementaire
 stukken. Het is getoetst tegen de voorbeelden uit de Leidraad zelf en gevalideerd tegen
 het officiële CSL 1.0.2-schema van Zotero. 
 
@@ -383,7 +383,7 @@ eisen van je uitgever of eindredacteur. Zie je een fout of afwijking? Meld het d
 Deze stijlen voor de druk van 2025 zijn opnieuw opgebouwd, met een testharnas dat
 elke verwijzing toetst tegen de voorbeelden in de Leidraad. Ik heb dit zeker niet met de hand gedaan, maar grotendeels Claude Code aangestuurd; het was een leuk vakantieproject.  
 
-Dit hele project was er niet geweest zonder het prachtige handwerk van **Joël Hendriks** en **Pieter van der Wees**, die de eerste
+Dit hele project was er niet geweest zonder het prachtige handwerk van **Joël Hendriks** en **Pieter van der Wees** ([@pjrwees](https://github.com/pjrwees)), die de eerste
 Leidraad-stijl voor Zotero maakten (editie 2019). Zonder dat pionierswerk was ik hier niet op gekomen om verder uit te werken, en had ik al die jaren ook zonder gezeten. Veel dank dus naar Joël en Pieter. 
 
 ## Licentie
