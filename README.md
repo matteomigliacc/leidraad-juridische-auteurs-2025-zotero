@@ -186,6 +186,8 @@ De geïnterviewde staat vooraan; de interviewers volgen na `in:`.
 
 ### Jurisprudentie
 
+Voor alle uitspraken geldt hetzelfde Item Type en dezelfde veldverdeling:
+
 | Zotero-veld | Inhoud |
 |---|---|
 | Item Type | Case |
@@ -200,8 +202,13 @@ De geïnterviewde staat vooraan; de interviewers volgen na `in:`.
 > **History staat vóór de vindplaats, Extra erachter.** Vandaar `concl.` in
 > History en `m.nt.` in Extra.
 
-**Nederlandse rechtspraak (§4.4.1).** Het Court-veld draagt de afgekorte
-instantienaam met plaats- of gebiedsnaam. De ECLI-code vertelt welke:
+Hieronder per soort instantie wat er in de velden hoort, met een ingevuld
+voorbeeld.
+
+#### Nederlandse rechtspraak (§4.4.1)
+
+Het Court-veld draagt de afgekorte instantienaam met plaats- of gebiedsnaam.
+De ECLI-code vertelt welke:
 
 | ECLI-code | Court |
 |---|---|
@@ -209,33 +216,79 @@ instantienaam met plaats- of gebiedsnaam. De ECLI-code vertelt welke:
 | `GHARL`, `GHAMS`, … | `Hof ` + plaatsnaam (`Hof Arnhem-Leeuwarden`) |
 | `HR` / `RVS` / `CRVB` / `CBB` | `HR` / `ABRvS` / `CRvB` / `CBb` |
 
-Een verbijzondering hoort erachter tussen haakjes: `ABRvS (grote kamer)`.
+Een verbijzondering hoort erachter tussen haakjes: `ABRvS (grote kamer)`,
+`Rb. Zeeland-West-Brabant (ktr.)`.
+
+| Zotero-veld | Voorbeeldinvoer |
+|---|---|
+| Court | `HR` |
+| Date Decided | `20 december 2019` |
+| Docket Number | `ECLI:NL:HR:2019:2006` |
+| Reporter / Reporter Volume | `NJ` · `2020/41` |
+| Extra | `m.nt. J. Spier` |
+| Case Name | `Staat/Urgenda` |
+
+> `HR 20 december 2019, ECLI:NL:HR:2019:2006, _NJ_ 2020/41, m.nt. J. Spier (Staat/Urgenda).`
+
+Zonder vindplaats en roepnaam volstaan Court, Date Decided en Docket Number:
 
 > `Rb. Gelderland 7 juni 2024, ECLI:NL:RBGEL:2024:3636, r.o. 5.7.`
 
-**HvJ EU en Gerecht EU (§4.5).** Zaaknummer **én** ECLI, door een komma
-gescheiden, samen in Docket Number:
+#### HvJ EU en Gerecht EU (§4.5)
+
+Zaaknummer **én** ECLI, door een komma gescheiden, samen in Docket Number.
+Gebruik `HvJ EU`, `Gerecht EU`, `HvJ EG` of `GvA EU` in Court naar gelang
+instantie en periode.
+
+| Zotero-veld | Voorbeeldinvoer |
+|---|---|
+| Court | `HvJ EU` |
+| Date Decided | `24 januari 2019` |
+| Docket Number | `C-477/17, ECLI:EU:C:2019:60` |
+| Reporter / Reporter Volume | `BNB` · `2019/66` |
+| Extra | `m.nt. P. Kavelaars` |
+| Case Name | `Baladin` |
 
 > `HvJ EU 24 januari 2019, C-477/17, ECLI:EU:C:2019:60, BNB 2019/66, m.nt. P. Kavelaars (Baladin).`
 
-Gebruik `Gerecht EU`, `HvJ EG` of `GvA EU` in Court naar gelang instantie en
-periode. Gevoegde zaken zet je vóór de nummers in Docket Number:
+**Gevoegde zaken** zet je vóór de nummers in Docket Number:
 `gevoegde zaken C-793/19 en C-794/19, ECLI:EU:C:2020:791`.
 
-**EHRM (§4.6).** Géén apart zaaknummer — de ECLI bevat aan het einde al het
-applicatienummer (p. 100). Docket Number bevat dus alleen de ECLI. Vul Case Name
-altijd met de roepnaam (klager `/` verwerende staat):
+#### EHRM (§4.6)
+
+Géén apart zaaknummer — de ECLI bevat aan het einde al het applicatienummer
+(p. 100). Docket Number bevat dus **alleen de ECLI**. Vul Case Name altijd met
+de roepnaam (klager `/` verwerende staat).
+
+| Zotero-veld | Voorbeeldinvoer |
+|---|---|
+| Court | `EHRM` |
+| Date Decided | `24 november 2005` |
+| Docket Number | `ECLI:CE:ECHR:2005:1124JUD005388600` |
+| Reporter / Reporter Volume | `NJ` · `2006/250` |
+| Extra | `m.nt. J.A. Peters` |
+| Case Name | `Tourancheau/Frankrijk` |
 
 > `EHRM 24 november 2005, ECLI:CE:ECHR:2005:1124JUD005388600, NJ 2006/250, m.nt. J.A. Peters (Tourancheau/Frankrijk).`
 
-**Conclusie A-G als bron.** Zet de hele aanduiding in Court, inclusief `Concl.` en
-de naam mét voorletters (Leidraad p. 96); de PHR-ECLI in Docket Number:
+#### Conclusie A-G als zelfstandige bron
+
+Zet de hele aanduiding in Court, inclusief `Concl.` en de naam **mét
+voorletters** (Leidraad p. 96); de PHR-ECLI in Docket Number.
+
+| Zotero-veld | Voorbeeldinvoer |
+|---|---|
+| Court | `Concl. A-G J. Spier` |
+| Date Decided | `20 november 2015` |
+| Docket Number | `ECLI:NL:PHR:2015:2307` |
+| Case Name | `McDonald-van Biezen/McDonald en Delta Lloyd` |
 
 > `Concl. A-G J. Spier 20 november 2015, ECLI:NL:PHR:2015:2307, par. 7.1 (McDonald-van Biezen/McDonald en Delta Lloyd).`
 
-**Rechtsoverweging of paragraaf.** De keuze tussen `r.o.` en `par.` hangt aan hoe
-de uitspraak zelf zijn onderdelen nummert, niet aan de instantie. Kies bij het
-invoegen de locatorsoort:
+#### Rechtsoverweging of paragraaf
+
+De keuze tussen `r.o.` en `par.` hangt aan hoe de uitspraak zelf zijn onderdelen
+nummert, niet aan de instantie. Kies bij het invoegen de locatorsoort:
 
 | Locatorsoort | Resultaat | Wanneer |
 |---|---|---|
